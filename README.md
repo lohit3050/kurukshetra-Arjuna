@@ -13,8 +13,8 @@ This project assists farmers by recommending the three most suitable crops for a
 - **Programming Language**: Python  
 
 ## **Dataset**
-- **Soil and Climate Data**: For crop recommendation  
-- **Historical Price Data**: For price prediction  
+- **For crop recommendation :** Nitrogen, Phosporous, Potassium, Temperature, Humidity, pH, Rainfall, Crop Name
+- **For price prediction :** Crop Name, Date, Min Price, Max Price, Modal Price
 
 ## **How It Works**
 1. **User Input**: Farmers provide soil, climate, and location details.  
