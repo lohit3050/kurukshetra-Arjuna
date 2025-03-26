@@ -23,3 +23,5 @@ This project assists farmers by recommending the three most suitable crops for a
 4. **Output**: The system displays the recommended crops along with their predicted price trends.  
 
 - we have choosen two models for this project.
+- 1st model is for the crop recommendation model we are planning for ensembling model (not yet finalised).
+- 2nd model is for the crop price prediction we are planning for the time series model (not yet finalised).
