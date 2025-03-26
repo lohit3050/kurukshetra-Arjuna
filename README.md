@@ -22,3 +22,4 @@ This project assists farmers by recommending the three most suitable crops for a
 3. **Price Prediction Model**: Forecasts future prices of the recommended crops.  
 4. **Output**: The system displays the recommended crops along with their predicted price trends.  
 
+- we have choosen two models for this project.
