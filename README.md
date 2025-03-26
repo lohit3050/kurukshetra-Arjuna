@@ -9,8 +9,11 @@ This project assists farmers by recommending the three most suitable crops for a
 - 📈 **Data-Driven Decision Making**: Helps farmers choose the best crop by considering both suitability and potential profitability.  
 
 ## **Tech Stack**
-- **Machine Learning & AI**: TensorFlow / Scikit-learn  
-- **Programming Language**: Python  
+- **Machine Learning & AI:** Scikit-learn, TensorFlow/Keras, Pandas, NumPy
+- **Programming Language:** Python
+- **Backend:** Flask
+- **Frontend:** HTML, CSS, and JavaScript
+ 
 
 ## **Dataset**
 - **For crop recommendation :** Nitrogen, Phosporous, Potassium, Temperature, Humidity, pH, Rainfall, Crop Name
