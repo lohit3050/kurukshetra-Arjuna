@@ -1,4 +1,24 @@
-# AI-based solution for the farmers to help in improving their productivity and yield.
+# **AI-based Crop Recommendation and Price Prediction**
 
-<h3>Description:</h3>
-An AI-based solution for farmers aims to enhance agricultural productivity and yield by providing datadriven insights and precision farming tools. Traditional farming practices often rely on weather patterns, intuition, and manual observation, which can be inefficient and lead to suboptimal crop production. By integrating AI, machine learning, and data analytics, this solution offers a more scientific and optimized approach to farming.
+## **Description**
+This project assists farmers by recommending the three most suitable crops for a given piece of land based on soil and environmental factors. Additionally, it predicts the future prices of these recommended crops using historical price data, helping farmers make informed decisions for better profitability.
+
+## **Features**
+- 🌱 **Crop Recommendation**: AI suggests the top three suitable crops based on soil parameters, climate, and historical yield data.  
+- 📊 **Price Prediction**: Forecasts future prices of the recommended crops using machine learning models trained on historical price trends.  
+- 📈 **Data-Driven Decision Making**: Helps farmers choose the best crop by considering both suitability and potential profitability.  
+
+## **Tech Stack**
+- **Machine Learning & AI**: TensorFlow / Scikit-learn  
+- **Programming Language**: Python  
+
+## **Dataset**
+- **Soil and Climate Data**: For crop recommendation  
+- **Historical Price Data**: For price prediction  
+
+## **How It Works**
+1. **User Input**: Farmers provide soil, climate, and location details.  
+2. **Crop Recommendation Model**: AI suggests three suitable crops.  
+3. **Price Prediction Model**: Forecasts future prices of the recommended crops.  
+4. **Output**: The system displays the recommended crops along with their predicted price trends.  
+
