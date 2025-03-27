@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1, h2 {
+            color: #2c3e50;
+            text-align: center;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        li {
+            background: white;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin: 20px 250px;
+            text-decoration: none;
+            background-color: #2980b9;
+            color: white;
+            padding:10px;
+            border-radius:2px;
+        }
+
+        a:hover {
+            background-color: #3498db;
+        }
+    </style>
+</head>
+<body>
+    <h1>Top Recommended Crops</h1>
+    <ul>
+        {% for crop in crops %}
+            <li>{{ crop }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Predicted Prices</h2>
+    <ul>
+        {% for crop, prediction in predictions.items() %}
+            <li>
+                {{ crop }}: 
+                Predicted price on {{ prediction.target_date }} is ₹{{ prediction.predicted_price | round(2) }}.
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="/">Go back</a>
+</body>
+</html>
