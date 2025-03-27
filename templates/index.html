@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Recommendation and Price Prediction</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* Banner Section with Background Slideshow */
+        .banner {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+            transition: background 1s ease-in-out;
+        }
+
+        .overlay-text {
+            position: absolute;
+            top: 50%;
+            left: 25%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 20px 40px;
+            font-size: 36px;
+            font-weight: bold;
+            border-radius: 10px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .overlay-text span {
+            display: block;
+            font-size: 18px;
+            font-weight: normal;
+            margin-top: 10px;
+        }
+
+        /* Form Container */
+        .container {
+            width: 45vw;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: absolute;
+            top: 50%;
+            right: 5%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Form Layout */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .input-box {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            font-size: 16px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        /* Full-width Button */
+        .full-width {
+            grid-column: span 2;
+            text-align: center;
+        }
+
+        input[type="submit"] {
+            background-color: #27ae60;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 50%;
+            display: block;
+            margin: 0 auto;
+            transition: all 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #2ecc71;
+            transform: scale(1.05);
+        }
+
+        /* Loading Overlay */
+        #loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: white;
+            font-size: 18px;
+            z-index: 1000;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid white;
+            border-top: 5px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                width: 90vw;
+                right: 50%;
+                transform: translate(50%, -50%);
+            }
+
+            .overlay-text {
+                font-size: 24px;
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                width: 95vw;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="banner">
+        <div class="overlay-text">
+            ProfitHarvest
+            <span>Crop Recommendation and Price Prediction</span>
+        </div>
+    </div>
+
+    <div class="container" id="form-container">
+        <form id="crop-form" method="POST" class="form-grid">
+            <div class="input-box">
+                <label for="N">Nitrogen (N):</label>
+                <input type="number" id="N" name="N" min="0" required>
+            </div>
+            <div class="input-box">
+                <label for="P">Phosphorus (P):</label>
+                <input type="number" id="P" name="P" min="0" required>
+            </div>
+            <div class="input-box">
+                <label for="K">Potassium (K):</label>
+                <input type="number" id="K" name="K" min="0" required>
+            </div>
+            <div class="input-box">
+                <label for="temperature">Temperature (°C):</label>
+                <input type="number" id="temperature" name="temperature" step="0.1" required>
+            </div>
+            <div class="input-box">
+                <label for="humidity">Humidity (%):</label>
+                <input type="number" id="humidity" name="humidity" step="0.1" min="0" max="100" required>
+            </div>
+            <div class="input-box">
+                <label for="ph">pH:</label>
+                <input type="number" id="ph" name="ph" step="0.01" min="0" max="14" required>
+            </div>
+            <div class="input-box">
+                <label for="rainfall">Rainfall (mm):</label>
+                <input type="number" id="rainfall" name="rainfall" step="0.1" required>
+            </div>
+            <div class="input-box">
+                <label for="date">Enter today's date:</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+            <div class="full-width">
+                <input type="submit" value="Get Recommendations">
+            </div>
+        </form>
+    </div>
+    
+    <!-- New Result Container -->
+    <div class="container" id="result-container" style="display: none;"></div>    
+
+    <div id="loading-overlay">
+        <div class="loading-spinner"></div>
+        <p>Processing... Please wait.</p>
+    </div>
+
+    <script>
+        const images = [
+            'static/images/image1.jpg',
+            'static/images/image2.jpg',
+            'static/images/image3.jpg',
+            'static/images/image4.jpg'
+        ];
+    
+        let index = 0;
+        function changeBackground() {
+            document.querySelector(".banner").style.backgroundImage = `url(${images[index]})`;
+            index = (index + 1) % images.length;
+        }
+        setInterval(changeBackground, 5000);
+    
+        document.getElementById("crop-form").addEventListener("submit", async function(event) {
+            event.preventDefault();
+            document.getElementById("loading-overlay").style.display = "flex";
+    
+            let formData = new FormData(this);
+    
+            try {
+                let response = await fetch("/predict", {
+                    method: "POST",
+                    body: formData
+                });
+    
+                let data = await response.json();
+                document.getElementById("loading-overlay").style.display = "none";
+    
+                let resultContainer = document.getElementById("result-container");
+                resultContainer.innerHTML = `
+                    <h2>Top Recommended Crops</h2>
+                    <ul>${data.crops.map(crop => `<li>${crop}</li>`).join('')}</ul>
+                    <h2>Predicted Prices</h2>
+                    <ul>${data.crops.map((crop, index) => `
+    <li>${crop}: ₹${data.predictions[index].predicted_price.toFixed(2)} (Date: ${data.predictions[index].target_date})</li>
+`).join('')}</ul>
+
+                    <button onclick="window.location.reload()">Go Back</button>
+                `;
+    
+                document.getElementById("form-container").style.display = "none";
+                resultContainer.style.display = "block";
+    
+            } catch (error) {
+                alert("Error fetching predictions.");
+            }
+        });
+    </script>
+    
+    
+</body>
+</html>
