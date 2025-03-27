@@ -11,8 +11,8 @@ from tensorflow.keras.layers import LSTM, Dense
 app = Flask(__name__)
 
 # Load datasets
-price_data = pd.read_csv(r'C:\Users\India\Desktop\crop-recommendation-and-price-prediction\maize.csv')
-df = pd.read_csv(r'C:\Users\India\Desktop\crop-recommendation-and-price-prediction\crop.csv')
+price_data = pd.read_csv(r'maize.csv')
+df = pd.read_csv(r'Crop_recommendation (1).csv')
 
 # Preprocess data
 price_data.columns = price_data.columns.str.strip()
